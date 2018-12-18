@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>学生信息管理</title>
+<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+	$.ajax({
+		url : "test.html",
+		data : {},
+		success : function(data) {
+			var d = data.list;
+
+		}
+	});
+	function setData(data) {
+		var arr=new Array();
+		arr.push("<tr>");
+		
+		arr.push("<td>");
+		arr.push("<td>");
+		arr.push("</td>");
+		
+		arr.push("</tr>");
+		var html=arr.join("");
+		
+		$("table tbody").apprend(html);
+		
+	}
+</script>
+</head>
+<body>
+	<table>
+		<thead>
+			<tr>
+				<td>学号</td>
+				<td>姓名</td>
+				<td>班级</td>
+				<td>性别</td>
+				<td>年龄</td>
+				<td>操作</td>
+			</tr>
+		</thead>
+		<tbody>
+
+		</tbody>
+	</table>
+
+</body>
+</html>
