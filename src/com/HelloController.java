@@ -27,15 +27,15 @@ public class HelloController extends Controller{
 		String cls=getPara("cls");
 		String sex=getPara("sex");
 		MongoDB.add(no, name, sex, cls, age);
+		redirect("/mongo");
 //		setAttr("result", 0);
 //		renderJson();
-		 render("index.html");
 	}
 	public void del() {
 		String no=getPara("no");
 		MongoDB.delOne("no",no);
 //		setAttr("result", 0);
 //		renderJson();
-		 render("index.html");
+		redirect("/mongo");
 	}
 }

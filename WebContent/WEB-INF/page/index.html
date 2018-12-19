@@ -13,7 +13,7 @@ table tr,td{
 
 <script type="text/javascript">
 	$.ajax({
-		url : "getSudents",
+		url : "mongo/getSudents",
 		data : {key:"no"},
 		
 		success : function(data) {
@@ -47,7 +47,7 @@ table tr,td{
 			arr.push("</td>");
 			
 			arr.push("<td>");
-			arr.push("<a href='del?no="+v.no+"'>删除</a>");
+			arr.push("<a href='mongo/del?no="+v.no+"'>删除</a>");
 			arr.push("</td>");
 			
 			arr.push("</tr>");
@@ -64,7 +64,7 @@ table tr,td{
 </head>
 <body>
 
-<a href="openAdd">添加信息</a>
+<a href="mongo/openAdd">添加信息</a>
 <hr>
 	<table>
 	<caption>mongodb学生信息管理</caption>
