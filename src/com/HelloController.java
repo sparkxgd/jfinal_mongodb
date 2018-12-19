@@ -1,10 +1,11 @@
 package com;
 
 
+import java.util.List;
+
 import org.bson.Document;
 
 import com.jfinal.core.Controller;
-import com.mongodb.client.FindIterable;
 
 public class HelloController extends Controller{
 	
@@ -12,9 +13,29 @@ public class HelloController extends Controller{
 		 render("index.html");
 	 }
 	 public void getSudents() {
-		 FindIterable<Document> list=MongoDB.find();
+		 List<Document> list=MongoDB.find();
 		 setAttr("list", list);
 		 renderJson();
 	 }
-	
+	public void openAdd() {
+		render("add.html");
+	}
+	public void save() {
+		String no=getPara("no");
+		String name=getPara("name");
+		String age=getPara("age");
+		String cls=getPara("cls");
+		String sex=getPara("sex");
+		MongoDB.add(no, name, sex, cls, age);
+//		setAttr("result", 0);
+//		renderJson();
+		 render("index.html");
+	}
+	public void del() {
+		String no=getPara("no");
+		MongoDB.delOne("no",no);
+//		setAttr("result", 0);
+//		renderJson();
+		 render("index.html");
+	}
 }

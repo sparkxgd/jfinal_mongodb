@@ -4,33 +4,71 @@
 <meta charset="UTF-8">
 <title>学生信息管理</title>
 <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+<style type="text/css">
+table tr,td{
+	border: 1px solid;
+}
+
+</style>
+
 <script type="text/javascript">
 	$.ajax({
-		url : "test.html",
-		data : {},
+		url : "getSudents",
+		data : {key:"no"},
+		
 		success : function(data) {
 			var d = data.list;
-
+			setData(d);
 		}
 	});
 	function setData(data) {
 		var arr=new Array();
-		arr.push("<tr>");
+		$.each(data,function(k,v){
+			
+			arr.push("<tr>");
+			arr.push("<td>");
+			arr.push(v.no);
+			arr.push("</td>");
+			
+			arr.push("<td>");
+			arr.push(v.name);
+			arr.push("</td>");
+			
+			arr.push("<td>");
+			arr.push(v.cls);
+			arr.push("</td>");
+			
+			arr.push("<td>");
+			arr.push(v.sex);
+			arr.push("</td>");
+			
+			arr.push("<td>");
+			arr.push(v.age);
+			arr.push("</td>");
+			
+			arr.push("<td>");
+			arr.push("<a href='del?no="+v.no+"'>删除</a>");
+			arr.push("</td>");
+			
+			arr.push("</tr>");
+		})
 		
-		arr.push("<td>");
-		arr.push("<td>");
-		arr.push("</td>");
-		
-		arr.push("</tr>");
 		var html=arr.join("");
 		
-		$("table tbody").apprend(html);
+		$("table tbody").append(html);
 		
 	}
 </script>
+
+
 </head>
 <body>
+
+<a href="openAdd">添加信息</a>
+<hr>
 	<table>
+	<caption>mongodb学生信息管理</caption>
+	
 		<thead>
 			<tr>
 				<td>学号</td>

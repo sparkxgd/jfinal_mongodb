@@ -1,17 +1,18 @@
 package com;
  
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bson.Document;
- 
+
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.result.UpdateResult;
  
 public class MongoDB {
-	public static MongoDatabase mongoDatabase;
-	private static String tableName ="student";
-	private static MongoCollection<Document> collection=mongoDatabase.getCollection(tableName);;
+	public static MongoCollection<Document> collection;
 	
 	   //插入文档  
     /** 
@@ -21,6 +22,16 @@ public class MongoDB {
     * */
 	public static boolean add(Document document) {
 		collection.insertOne(document);
+		return true;
+	}
+	public static boolean add(String no,String name,String sex,String cls,String age) {
+		Document doc=new Document();
+		doc.append("no", no);
+		doc.append("name", name);
+		doc.append("sex", sex);
+		doc.append("cls", cls);
+		doc.append("age", age);
+		collection.insertOne(doc);
 		return true;
 	}
 	/**
@@ -39,9 +50,14 @@ public class MongoDB {
     * 2. 获取游标MongoCursor<Document> 
     * 3. 通过游标遍历�?索出的文档集�? 
     * */  
-	public static FindIterable<Document> find() {
+	public static List<Document> find() {
 		FindIterable<Document> findIterable = collection.find();
-		return findIterable;
+		MongoCursor<Document> cousor=findIterable.iterator();
+		List<Document> dataList=new ArrayList<Document>();
+		while(cousor.hasNext()){
+			dataList.add(cousor.next());
+		}
+		return dataList;
 	}
 	public static UpdateResult update(String fieldName, Object value,String upatefieldName, Object updatevalue) {
 		//更新文档   将文档中likes=100的文档修改为likes=200   

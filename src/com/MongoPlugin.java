@@ -2,13 +2,14 @@ package com;
  
 import com.jfinal.plugin.IPlugin;
 import com.mongodb.MongoClient;
+import com.mongodb.client.MongoDatabase;
  
 public class MongoPlugin implements IPlugin{
 	private String host;
 	private int port;
 	private String dbname;
 	MongoClient mongoClient;
-	
+	private String tableName ="student";
 
 	public String getHost() {
 		return host;
@@ -35,11 +36,12 @@ public class MongoPlugin implements IPlugin{
        try {
     	   mongoClient = new MongoClient(host,port);
 		   // 连接到数据库
-    	   MongoDB.mongoDatabase = mongoClient.getDatabase(dbname);
+    	   MongoDatabase mongoDatabase = mongoClient.getDatabase(dbname);
+    	   MongoDB.collection =mongoDatabase.getCollection(tableName);;
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
-		return false;
+		return true;
 	}
 	@Override
 	public boolean stop() {

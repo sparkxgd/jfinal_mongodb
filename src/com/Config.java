@@ -29,7 +29,7 @@ public class Config extends JFinalConfig{
 	@Override
 	public void configPlugin(Plugins me) {
 		MongoPlugin mp=new MongoPlugin();
-		mp.setHost("127.0.0.1");
+		mp.setHost("192.168.1.5");
 		mp.setPort(27017);
 		mp.setDbname("kaili");
 		me.add(mp);
